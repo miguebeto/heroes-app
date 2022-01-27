@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getHeroById } from '../../selectors/getHeroById';
 
@@ -6,7 +6,9 @@ import { getHeroById } from '../../selectors/getHeroById';
 export const HeroScreen = () => {
   const navigate = useNavigate();
   const {heroId} = useParams();
-  const hero = getHeroById(heroId);
+
+  //usamos el useMemo para que solo se ejecute la funcion cuando cambie el id
+  const hero =  useMemo(()=>getHeroById(heroId), [ heroId ]);
 
   const imagePath = `/assets/${hero.id}.jpg`;
 

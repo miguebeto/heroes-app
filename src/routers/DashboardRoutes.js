@@ -6,6 +6,7 @@ import { MarvelScreen } from "../components/marvel/MarvelScreen";
 import { SearchScreen } from "../components/search/SearchScreen";
 import { HeroScreen } from '../components/hero/HeroScreen';
 
+// Constante que se encarga de encontrar el elemento que concida con el la direccion o con el id que se le pasa por parametro
 export const DashboardRoutes = () => {
   return (
     <>  
@@ -16,7 +17,7 @@ export const DashboardRoutes = () => {
               <Route path="dc" element={<DcScreen />} />
 
               <Route path="search" element={<SearchScreen />} />
-              <Route path="hero" element={<HeroScreen/>} />
+              <Route path="hero/:heroId" element={<HeroScreen/>} />
 
               <Route path="/" element={<MarvelScreen />} />
           </Routes>

@@ -1,5 +1,7 @@
 import React from "react";
 import { useForm } from "../../hooks/useForm";
+import { getHeroByName } from "../../selectors/getHeroByNames";
+import { HeroCard } from "../hero/HeroCard";
 
 export const SearchScreen = () => {
   //usamos el custom hook para obtener el estado y el manejador de eventos
@@ -9,6 +11,8 @@ export const SearchScreen = () => {
 
   //destructuramos el estado
   const { searchText } = values;
+
+  const heroesFiltered = getHeroByName('Algo por aqui');
 
   //funcion que se ejecuta al presionar el boton de busqueda o enter
   const handleSearch = (e) => {
@@ -42,6 +46,19 @@ export const SearchScreen = () => {
               Buscar...
             </button>
           </form>
+        </div>
+        <div className="col-7">
+          <h4>Resultados</h4>
+          <hr />
+
+          {
+            heroesFiltered.map((hero) => (
+              <HeroCard 
+                key={hero.id}
+                { ...hero }
+              />
+            ))
+          }
         </div>
       </div>
     </>

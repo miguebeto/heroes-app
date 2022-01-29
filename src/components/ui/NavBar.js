@@ -1,17 +1,21 @@
 import React, { useContext } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../auth/authContext';
+import { types } from '../../types/types';
 
 //menu de navegacion responsivo con orientacion horizontal en pantallas grandes y vertical en pantallas pequeñas
 export const Navbar = () => {
     //importamos el contexto de autenticacion
-    const { user } = useContext(AuthContext);
+    const { user, dispatch } = useContext(AuthContext);
 
     // useNavigate() es un hook que nos permite navegar entre rutas
    const navigate = useNavigate();
 
    //redirige a la pagina de inicio cuando se presiona el boton y no permite el regreso a la pagina anterior
     const handleLogout = () => {
+
+        dispatch({ type: types.logout });
+
         navigate("/login", { replace: true });
     }
 

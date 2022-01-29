@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useReducer } from "react";
+import { AuthContext } from "./auth/authContext";
+import { authReducer } from "./auth/authReducer";
 import { AppRouter } from "./routers/AppRouter";
 
-export const HeroesApp = () => {
-  return <AppRouter />;
+//creamos el init que es el estado inicial de nuestra aplicacion la primera vez que se carga
+const init = () => {
+  return JSON.parse(localStorage.getItem("user")) || {logged: false};
+}
+
+//utilizamos el contexto para proveer el estado y la funcion dispatch a los componentes hijos
+export const HeroesApp = () => { 
+
+  //creamos el useReducer para interactuar con el estado de nuestra aplicacion en el reducer
+  const [user, dispatch] = useReducer(authReducer, {}, init);
+
+  return (
+    <AuthContext.Provider value={{
+      user,
+      dispatch,
+    }}>
+      <AppRouter />
+    </AuthContext.Provider>
+  )
 };

@@ -13,9 +13,8 @@ export const Navbar = () => {
 
    //redirige a la pagina de inicio cuando se presiona el boton y no permite el regreso a la pagina anterior
     const handleLogout = () => {
-
+        //usamos el dispatch para enviar el action de logout y reemplazar la ruta actual por la ruta del login
         dispatch({ type: types.logout });
-
         navigate("/login", { replace: true });
     }
 

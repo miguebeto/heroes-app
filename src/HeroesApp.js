@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { AuthContext } from "./auth/authContext";
 import { authReducer } from "./auth/authReducer";
 import { AppRouter } from "./routers/AppRouter";
@@ -13,6 +13,12 @@ export const HeroesApp = () => {
 
   //creamos el useReducer para interactuar con el estado de nuestra aplicacion en el reducer
   const [user, dispatch] = useReducer(authReducer, {}, init);
+
+  //agregamos un efecto que verifique si el usuario esta logueado o no y lo guarde en el localStorage
+  useEffect(() => {
+    if(!user) return;
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
   return (
     <AuthContext.Provider value={{

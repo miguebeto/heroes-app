@@ -19,7 +19,9 @@ export const LoginScreen = () => {
     };
     dispatch(action);
 
-    navigate("/marvel", { replace: true });
+    //redireccionamos a la ultima pagina visitada guardada en el localStorage
+    const LastPath = localStorage.getItem("lastPath") || "/marvel";
+    navigate(LastPath, { replace: true });
   };
 
   return (
